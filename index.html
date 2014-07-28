@@ -78,10 +78,12 @@
 				<section>
 					<h3>アプリケーション概要</h3>
 					<ul>
+						<li>B2Bのクローズドな動画プラットフォーム</li>
 						<li>様々な動画を会社等の組織内で共有したい</li>
 						<li>動画の一部を切り出したり、プレイリストを作ったりしたい</li>
 						<li>動画は、Web及びアプリで視聴したい</li>
-						<li>既存システムを全面的に改修したい</li>
+						<li>既存システム(Zend製)を全面的に改修したい</li>
+						<li>今年の8月から本番運用開始したい（サービスイン当初の顧客は1社）</li>
 					</ul>
 				</section>
 
@@ -93,16 +95,13 @@
 					<h3>インフラ</h3>
 					<p>Azure</p>
 					<img src="" alt="azureのロゴとか">
-				</section>
-
-				<section>
-					<h3>動画関係</h3>
 					<ul>
-						<li>このアプリケーションで最も重要なのは、「動画配信をどうするか」「動画編集をどうするか」ということ</li>
-						<li>動画の問題に比べれば、サーバサイドが何で出来ているかというのは大した問題ではない</li>
-						<li>当初はAzureのサービス活用を検討したけど、諸事情で取りやめに</li>
-						<li>結果的には、「mp4で配信」「ffmpegでエンコード」という形式に落ち着いた</li>
+						<li>動画配信やエンコード等のサービスを利用するために採用。</li>
+						<li>しかし、諸事情で動画配信やエンコード機能の利用は取りやめに。。。</li>
+						<li>結果的には、「mp4で配信」「ffmpegでエンコード」という形式に落ち着いた。</li>
+						<li>現在、Azureの機能で使ってるのは仮想マシンとストレージ。</li>
 					</ul>
+
 				</section>
 
 				<section>
@@ -111,7 +110,7 @@
 						<li>Web+DBサーバ: 1台</li>
 						<li>エンコードサーバー: 複数台</li>
 					</ul>
-					<p>今のところ負荷は大きくないので、Web+DBは1サーバに集約している。</p>
+					<p>今のところ負荷は大きくないので、Web+DBは1台に集約している。</p>
 					<p>エンコードはマシンパワーが必要なので、サービスイン当初から複数台構成で。</p>
 				</section>
 
@@ -124,6 +123,7 @@
 						<li>PHP</li>
 					</ul>
 					<p>要は、よくあるLAMP構成。<br>既存システムの構成をそのまま流用。</p>
+					<p>Nginxは検討したが、今のところ不要だと考え、既存のApacheをそのまま使用。</p>
 				</section>
 
 				<section>
@@ -131,10 +131,10 @@
 					<ul>
 						<li>動画編集機能(AngularJS)</li>
 						<li>動画配信Web(vue.jsとか)</li>
-						<li>動画配信アプリ(Web APIを叩いてデータ取得)</li>
+						<li>動画配信アプリ</li>
 						<li>バックエンドWeb API(Phalcon)</li>
 					</ul>
-					<p>viewの描画は基本的にクライアントに任せる。<br>
+					<p>viewの描画はクライアントに任せる。<br>
 						クライアントがカバーできない部分（多言語対応等）をPHPで補う。</p>
 				</section>
 
@@ -227,6 +227,14 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 					<li>zend_mm_heap corrupted</li>
 					<li>Segmentation fault</li>
 				</ul>
+				<p>どちらも原因は不正なメモリアクセス。<br>
+					経験上、モデルのプロパティ操作の際に発生しやすい。<br>
+					Segmentation faultはPHPコードに原因があることがほとんどだが、zend_mm_heap corruptedはフレームワークのバグ。</p>
+				<p>対処法：<br>
+					(1) 最新版のPhalconを使う<br>
+					(2) 止まっている箇所を頑張って探して、コードを色々変更してみる</p>
+				<p>大きなコミットの直後にこれらのエラーが発生すると、原因究明が大変。<br>
+					こまめにコミット→テストのサイクルを走らせることで、対処しやすくなる。</p>
 			</section>
 
 			<section>
@@ -238,7 +246,7 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 				<ul>
 					<li>PhalconのAPIリファレンスは自動生成。ソースコードのコメントが誤っているとAPIリファレンスまでおかしくなる。</li>
 					<li>自動生成スクリプトにバグがあり、正常にパラメータを取れていないことがある</li>
-					<li>例：Phalcon\Http\Request::getJsonRawBody()の第2引数は、ソースのDocコメントには載っているが、APIリファレンスには載っていない</li>
+					<li>例：Phalcon\Http\Request::getJsonRawBody()の第1引数は、ソースのDocコメントには載っているが、APIリファレンスには載っていない</li>
 				</ul>
 			</section>
 
@@ -253,6 +261,15 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 
 			<section>
 				<h3>まとめ</h3>
+				<ul>
+					<li>「Phalconだから特別な何かをしないといけない」ということはほとんど無い。</li>
+					<li>普通に作れば普通に動く。</li>
+					<li>現時点では荒削りな部分もある。</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>ご清聴ありがとうございました。</h2>
 			</section>
 
 			</div>
