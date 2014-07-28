@@ -173,10 +173,6 @@ $ phalcon project PROJECT_NAME --type=modules
 │   │   ├── models
 │   │   └── views
 │   └── viewer
-│       ├── config
-│       ├── controllers
-│       ├── models
-│       └── views
 ├── config
 ├── models
 │   └── Base
@@ -222,7 +218,7 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 			</section>
 
 			<section>
-				<h3>Phalcon使用時に遭遇する特徴的なエラーメッセージ</h3>
+				<h3>Phalcon使用時に遭遇する<br>特徴的なエラーメッセージ</h3>
 				<ul>
 					<li>zend_mm_heap corrupted</li>
 					<li>Segmentation fault</li>
@@ -230,9 +226,14 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 				<p>どちらも原因は不正なメモリアクセス。<br>
 					経験上、モデルのプロパティ操作の際に発生しやすい。<br>
 					Segmentation faultはPHPコードに原因があることがほとんどだが、zend_mm_heap corruptedはフレームワークのバグ。</p>
-				<p>対処法：<br>
-					(1) 最新版のPhalconを使う<br>
-					(2) 止まっている箇所を頑張って探して、コードを色々変更してみる</p>
+			</section>
+
+			<section>
+				<h3>Phalcon本体のバグ対処法</h3>
+				<ol>
+					<li>最新版のPhalconを使う</li>
+					<li>止まっている箇所を頑張って探して、コードを色々変更してみる</li>
+				</ol>
 				<p>大きなコミットの直後にこれらのエラーが発生すると、原因究明が大変。<br>
 					こまめにコミット→テストのサイクルを走らせることで、対処しやすくなる。</p>
 			</section>
