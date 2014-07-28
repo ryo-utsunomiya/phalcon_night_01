@@ -135,6 +135,8 @@
 						<li>動画配信アプリ(Web APIを叩いてデータ取得)</li>
 						<li>バックエンドWeb API(Phalcon)</li>
 					</ul>
+					<p>viewの描画は基本的にクライアントに任せる。<br>
+						クライアントがカバーできない部分（多言語対応等）をPHPで補う。</p>
 				</section>
 
 				<section>
@@ -184,7 +186,8 @@ $ phalcon project PROJECT_NAME --type=modules
 ├── tests
 └── vendor
 					</code></pre>
-					<p>コマンドによる生成直後のmodules構成は、モデルがモジュールごとに分かれているが、共通モデルはアプリケーションルート直下のmodelsにまとめた。<br>各モジュールのmodelsにはフォーム等、モジュール固有のクラスを入れてある。</p>
+					<p>コマンドによる生成直後のmodules構成は、モデルがモジュールごとに分かれているが、共通モデルはアプリケーションルート直下のmodelsにまとめた。
+						<br>各モジュールのmodelsにはフォーム等、モジュール固有のクラスを入れてある。</p>
 				</section>
 
 			<section>
