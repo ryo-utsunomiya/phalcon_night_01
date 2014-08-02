@@ -92,9 +92,7 @@
 				</section>
 
 				<section>
-					<h3>インフラ</h3>
-					<p>Azure</p>
-					<img src="" alt="azureのロゴとか">
+					<h3>インフラ：Azure</h3>
 					<ul>
 						<li>動画配信やエンコード等のサービスを利用するために採用。</li>
 						<li>しかし、諸事情で動画配信やエンコード機能の利用は取りやめに。。。</li>
@@ -111,7 +109,7 @@
 						<li>エンコードサーバー: 複数台</li>
 					</ul>
 					<p>今のところ負荷は大きくないので、Web+DBは1台に集約している。</p>
-					<p>エンコードはマシンパワーが必要なので、サービスイン当初から複数台構成で。</p>
+					<p>エンコードはマシンパワーが必要なので、サービスイン当初から複数台構成。</p>
 				</section>
 
 				<section>
@@ -129,13 +127,11 @@
 				<section>
 					<h3>アプリケーション構成</h3>
 					<ul>
-						<li>動画編集機能(AngularJS)</li>
-						<li>動画配信Web(vue.jsとか)</li>
+						<li>動画編集Web(AngularJS)</li>
+						<li>動画配信Web(jQuery等)</li>
 						<li>動画配信アプリ</li>
 						<li>バックエンドWeb API(Phalcon)</li>
 					</ul>
-					<p>viewの描画はクライアントに任せる。<br>
-						クライアントがカバーできない部分（多言語対応等）をPHPで補う。</p>
 				</section>
 
 				<section>
@@ -149,14 +145,28 @@
 				</section>
 
 				<section>
-					<h3>工夫したこと：モデルの構成</h3>
+					<h3>工夫したこと(1)：Viewの作り方</h3>
+				</section>
+
+				<section>
+					<h3>Viewの作り方</h3>
+					<ol>
+						<li>Webでは、当初からAngularJSを使う予定だった。</li>
+						<li>Phalconのテンプレートエンジン・Voltの記法は、Angularの記法とバッティングする。<br>
+							→viewにはVoltを使用せず、生PHPをテンプレートとして使うことに。</li>
+						<li>Viewの描画はほぼAngularに任せ、PHPは最低限のレイアウトのみを受け持つ。</li>
+					</ol>
+				</section>
+
+				<section>
+					<h3>工夫したこと(2)：モデルの構成</h3>
 				</section>
 
 				<section>
 					<h3>プロジェクトタイプ</h3>
 					<ul>
-						<li>micro / simple / modules がある</li>
-						<li>今回のアプリでは、modules構成を使用</li>
+						<li>micro / simple / modules がある。</li>
+						<li>今回のアプリでは、modules構成を使用。</li>
 					</ul>
 					<pre><code>
 $ phalcon project PROJECT_NAME --type=modules
@@ -172,7 +182,7 @@ $ phalcon project PROJECT_NAME --type=modules
 │   │   ├── controllers
 │   │   ├── models
 │   │   └── views
-│   └── viewer
+│   └── viewer （中の構成はeditorと同様）
 ├── config
 ├── models
 │   └── Base
@@ -225,17 +235,18 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 				</ul>
 				<p>どちらも原因は不正なメモリアクセス。<br>
 					経験上、モデルのプロパティ操作の際に発生しやすい。<br>
-					Segmentation faultはPHPコードに原因があることがほとんどだが、zend_mm_heap corruptedはフレームワークのバグ。</p>
+					Segmentation faultはPHPコードにも原因があることが多い。<br>
+					一方、zend_mm_heap corruptedはフレームワークのバグ。</p>
 			</section>
 
 			<section>
 				<h3>Phalcon本体のバグの対処法</h3>
 				<ol>
-					<li>最新版のPhalconを使う</li>
-					<li>止まっている箇所を探して、コードを色々変更してみる</li>
-					<li>止まっている箇所の周辺のソースコード(Phalcon本体)を読んでみる</li>
+					<li>最新版のPhalconを使う。</li>
+					<li>止まっている箇所を探して、コードを色々変更してみる。</li>
+					<li>止まっている箇所の周辺のソースコード(Phalcon本体)を読んでみる。</li>
 				</ol>
-				<p>大きなコミットの直後にエラーが発生すると、原因究明が大変。<br>
+				<p>大きな変更の直後にエラーが発生すると、原因究明が大変。<br>
 					こまめにコミット→テストのサイクルを走らせることで、対処しやすくなる。</p>
 			</section>
 
@@ -244,11 +255,12 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 			</section>
 
 			<section>
-				<h3>Phalconのドキュメントの弱点(1): APIリファレンス</h3>
+				<h3>Phalconのドキュメントの弱点(1)：<br>APIリファレンス</h3>
 				<ul>
-					<li>PhalconのAPIリファレンスは自動生成。ソースコードのコメントが誤っているとAPIリファレンスまでおかしくなる。</li>
-					<li>自動生成スクリプトにバグがあり、正常にパラメータを取れていないことがある</li>
-					<li>例：Phalcon\Http\Request::getJsonRawBody()の第1引数は、ソースのDocコメントには載っているが、APIリファレンスには載っていない</li>
+					<li>PhalconのAPIリファレンスは、ソースコードから自動生成している。<br>
+						→ソースコードのコメントが誤っていると、APIリファレンスまでおかしくなる。</li>
+					<li>自動生成スクリプトにバグがあり、正常にパラメータを取れていないことがある。</li>
+					<li>例：Phalcon\Http\Request::getJsonRawBody()の第1引数は、ソースのDocコメントには載っているが、APIリファレンスには載っていない。</li>
 				</ul>
 			</section>
 
@@ -258,6 +270,15 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 					<li>Phalconのドキュメントで日本語になっているのは、全体の10%程度。</li>
 					<li>実は、20%ほど翻訳は進んでいるのだけど、リリースされていない。。。</li>
 					<li>翻訳に興味の有る方いらっしゃれば是非。</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>これから苦労しそうなこと：<br>バージョンアップ</h3>
+				<ul>
+					<li>Phalconの現行バージョン(1.3.2)はまだ不安定な部分があるので、継続して保守していく上で、より安定したバージョンに差し替えたい。</li>
+					<li>Phalcon 2ではZephirという中間言語を挟むようになるが、まだ不安定で、Zephirのコンパイラのビルドにこけることがしばしば…</li>
+					<li>Phalcon 2の初期バージョンは、1系とのAPI互換性が保証されてるので、その点は割と安心。</li>
 				</ul>
 			</section>
 
