@@ -251,6 +251,20 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 			</section>
 
 			<section>
+				<h3>不具合をすぐに検知する体制を作る</h3>
+				<ul style="margin: 1em 0;">
+					<li>CI(Jenkins等)</li>
+					<li>ユニットテスト(PHPUnit)</li>
+					<li>APIテスト(frisby.js等)</li>
+					<li>（今回は導入しなかったが）Selenuimも有効</li>
+				</ul>
+				<p>
+				Phalconのバグによるエラーは、予測が困難。<br>
+				発生したらすぐに検知できる体制を作る必要がある。
+				</p>
+			</section>
+
+			<section>
 				<h3>苦労したこと(2)：ドキュメント</h3>
 			</section>
 
