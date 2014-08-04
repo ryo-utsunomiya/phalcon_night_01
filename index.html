@@ -140,7 +140,6 @@
 						<li>動作が速い</li>
 						<li>アーキテクチャが割とモダン(PHP5.3+)</li>
 						<li>シンプルなAPI</li>
-						<li>学習コストが低め（要：英語）</li>
 					</ul>
 				</section>
 
@@ -243,8 +242,10 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 				<h3>Phalcon本体のバグの対処法</h3>
 				<ol>
 					<li>最新版のPhalconを使う。</li>
-					<li>止まっている箇所を探して、コードを色々変更してみる。</li>
-					<li>止まっている箇所の周辺のソースコード(Phalcon本体)を読んでみる。</li>
+					<li>止まっている箇所を特定する</li>
+					<li>止まっている原因のクラスが分かったら、GitHubにIssueが上がってないか確認する（回避策が載ってるかも）</li>
+					<li>止まっている箇所のコードを色々変更してみる（大体これで回避できる）。</li>
+					<li>止まっているクラスやメソッドのソースコード(Phalcon本体)を読んでみる（回避策が分かるかも）。</li>
 				</ol>
 				<p>大きな変更の直後にエラーが発生すると、原因究明が大変。<br>
 					こまめにコミット→テストのサイクルを走らせることで、対処しやすくなる。</p>
@@ -252,7 +253,7 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 
 			<section>
 				<h3>不具合をすぐに検知する体制を作る</h3>
-				<ul style="margin: 1em 0;">
+				<ul>
 					<li>CI(Jenkins等)</li>
 					<li>ユニットテスト(PHPUnit)</li>
 					<li>APIテスト(frisby.js等)</li>
@@ -290,7 +291,7 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 			<section>
 				<h3>これから苦労しそうなこと：<br>バージョンアップ</h3>
 				<ul>
-					<li>Phalconの現行バージョン(1.3.2)はまだ不安定な部分があるので、継続して保守していく上で、より安定したバージョンに差し替えたい。</li>
+					<li>Phalconの現行バージョン(1.3.2)はまだ不安定な部分があるので、継続して開発していく上で、より安定したバージョンに差し替えたい。</li>
 					<li>Phalcon 2ではZephirという中間言語を挟むようになるが、まだ不安定で、Zephirのコンパイラのビルドにこけることがしばしば…</li>
 					<li>Phalcon 2の初期バージョンは、1系とのAPI互換性が保証されてるので、その点は割と安心。</li>
 				</ul>
