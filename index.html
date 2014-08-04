@@ -38,6 +38,7 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
 	</head>
 
 	<body>
@@ -47,6 +48,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
+
 					<h1 style="font-size:2.1em;">Phalcon + AngularJSで作る<br>動画プラットフォーム</h1>
 					<p>Phalcon Night</p>
 					<p>アシアル株式会社 宇都宮諒</p>
@@ -67,7 +69,7 @@
 
 				<section>
 					<h3>アジェンダ</h3>
-					<ul>
+					<ul style="margin-top:1em;">
 						<li>アプリケーション概要</li>
 						<li>アーキテクチャ</li>
 						<li>アプリケーション設計</li>
@@ -77,7 +79,7 @@
 
 				<section>
 					<h3>アプリケーション概要</h3>
-					<ul>
+					<ul style="margin-top:1em;">
 						<li>B2Bのクローズドな動画プラットフォーム</li>
 						<li>様々な動画を会社等の組織内で共有したい</li>
 						<li>動画の一部を切り出したり、プレイリストを作ったりしたい</li>
@@ -93,7 +95,7 @@
 
 				<section>
 					<h3>インフラ：Azure</h3>
-					<ul>
+					<ul style="margin-top:1em;">
 						<li>動画配信やエンコード等のサービスを利用するために採用。</li>
 						<li>しかし、諸事情で動画配信やエンコード機能の利用は取りやめに。。。</li>
 						<li>結果的には、「mp4で配信」「ffmpegでエンコード」という形式に落ち着いた。</li>
@@ -104,29 +106,32 @@
 
 				<section>
 					<h3>サーバ構成</h3>
-					<ul>
+					<ul style="margin-top:1em;">
 						<li>Web+DBサーバ: 1台</li>
 						<li>エンコードサーバー: 複数台</li>
 					</ul>
-					<p>今のところ負荷は大きくないので、Web+DBは1台に集約している。</p>
-					<p>エンコードはマシンパワーが必要なので、サービスイン当初から複数台構成。</p>
+					<p style="font-size:smaller;margin-top:1em;text-align:left;width:19em;margin-left:8em;">
+						今のところ負荷は大きくないので、Web+DBは1台に集約している。
+					<br>エンコードはマシンパワーが必要なので、サービスイン当初から複数台構成。</p>
 				</section>
 
 				<section>
 					<h3>システム構成</h3>
-					<ul>
+					<ul style="margin:1em 0 1em -5em;">
 						<li>CentOS</li>
 						<li>Apache</li>
 						<li>MySQL</li>
 						<li>PHP</li>
 					</ul>
-					<p>要は、よくあるLAMP構成。<br>既存システムの構成をそのまま流用。</p>
-					<p>Nginxは検討したが、今のところ不要だと考え、既存のApacheをそのまま使用。</p>
+					<p style="text-align:left;font-size:smaller;width:19em;margin-left:8em;">
+						要は、よくあるLAMP構成。
+						<br>既存システムの構成をそのまま流用。
+					<br>Nginxは検討したが、今のところ不要だと考え、既存のApacheをそのまま使用。</p>
 				</section>
 
 				<section>
 					<h3>アプリケーション構成</h3>
-					<ul>
+					<ul style="margin-top:1em;">
 						<li>動画編集Web(AngularJS)</li>
 						<li>動画配信Web(jQuery等)</li>
 						<li>動画配信アプリ</li>
@@ -136,11 +141,10 @@
 
 				<section>
 					<h3>Phalconを選んだ理由</h3>
-					<ul>
+					<ul style="margin-top:1em;">
 						<li>動作が速い</li>
 						<li>アーキテクチャが割とモダン(PHP5.3+)</li>
 						<li>シンプルなAPI</li>
-						<li>学習コストが低め（要：英語）</li>
 					</ul>
 				</section>
 
@@ -150,7 +154,7 @@
 
 				<section>
 					<h3>Viewの作り方</h3>
-					<ol>
+					<ol style="margin-top:1em;">
 						<li>Webでは、当初からAngularJSを使う予定だった。</li>
 						<li>Phalconのテンプレートエンジン・Voltの記法は、Angularの記法とバッティングする。<br>
 							→viewにはVoltを使用せず、生PHPをテンプレートとして使うことに。</li>
@@ -164,7 +168,7 @@
 
 				<section>
 					<h3>プロジェクトタイプ</h3>
-					<ul>
+					<ul style="margin-top:1em;">
 						<li>micro / simple / modules がある。</li>
 						<li>今回のアプリでは、modules構成を使用。</li>
 					</ul>
@@ -197,7 +201,7 @@ $ phalcon project PROJECT_NAME --type=modules
 
 			<section>
 				<h3>DBスキーマ</h3>
-				<p>以下の手順でDBスキーマとモデルクラスの管理を行った。</p>
+				<p style="margin-top:1em;">以下の手順でDBスキーマとモデルクラスの管理を行った。</p>
 				<ol>
 					<li><a href="http://www-jp.mysql.com/products/workbench/">MySQL Workbench</a>でER図作成</li>
 					<li>WorkbenchのForward Engineer機能でスキーマ定義のSQL文を生成</li>
@@ -212,7 +216,6 @@ $ phalcon project PROJECT_NAME --type=modules
 				<ul>
 					<li>DBスキーマを更新したら、Baseモデルも全て作り直す。</li>
 					<li>Baseモデルは自動生成を行う。開発者はBaseモデルには触らない。</li>
-					<li>symfony 1(doctrine 1)の経験者には馴染みやすい考え方。</li>
 					<li>モデルに共通で持たせたい処理（ビヘイビア等）はBaseモデルの親(CoreModel)に実装する。</li>
 					<li>CoreModelは、Phalcon\Mvc\Model を継承する。</li>
 					<li>アプリケーション内で使用するモデルは、Baseモデルを継承する。</li>
@@ -224,29 +227,30 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 			</section>
 
 			<section>
-				<h3>苦労したこと(1)：フレームワーク本体のバグ</h3>
+				<h3>苦労したこと(1)：<br>フレームワーク本体のバグ</h3>
 			</section>
 
 			<section>
 				<h3>Phalcon使用時に遭遇する<br>特徴的なエラーメッセージ</h3>
-				<ul>
+				<ul style="margin:1em 0 1em -5em;">
 					<li>zend_mm_heap corrupted</li>
 					<li>Segmentation fault</li>
 				</ul>
-				<p>どちらも原因は不正なメモリアクセス。<br>
-					経験上、モデルのプロパティ操作の際に発生しやすい。<br>
+				<p style="width:19em;margin-left:4em;text-align:left;font-size:smaller;">
+					どちらも原因は不正なメモリアクセス。<br>
 					Segmentation faultはPHPコードにも原因があることが多い。<br>
-					一方、zend_mm_heap corruptedはフレームワークのバグ。</p>
+					一方、zend_mm_heap corruptedはフレームワークのバグ。<br>
+					経験上、モデルのプロパティ操作の際に発生しやすい。</p>
 			</section>
 
 			<section>
 				<h3>Phalcon本体のバグの対処法</h3>
-				<ol>
+				<ol style="margin-top:1em;">
 					<li>最新版のPhalconを使う。</li>
 					<li>止まっている箇所を探して、コードを色々変更してみる。</li>
 					<li>止まっている箇所の周辺のソースコード(Phalcon本体)を読んでみる。</li>
 				</ol>
-				<p>大きな変更の直後にエラーが発生すると、原因究明が大変。<br>
+				<p style="margin-top:1em;">大きな変更の直後にエラーが発生すると、原因究明が大変。<br>
 					こまめにコミット→テストのサイクルを走らせることで、対処しやすくなる。</p>
 			</section>
 
@@ -266,7 +270,7 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 
 			<section>
 				<h3>Phalconのドキュメントの弱点(2): 翻訳</h3>
-				<ul>
+				<ul style="margin-top:1em;">
 					<li>Phalconのドキュメントで日本語になっているのは、全体の10%程度。</li>
 					<li>実は、20%ほど翻訳は進んでいるのだけど、リリースされていない。。。</li>
 					<li>翻訳に興味の有る方いらっしゃれば是非。</li>
