@@ -241,13 +241,13 @@ $ phalcon project PROJECT_NAME --type=modules
 				<ul>
 					<li>DBスキーマを更新したら、Baseモデルも全て作り直す。</li>
 					<li>Baseモデルは自動生成を行う。開発者はBaseモデルには触らない。</li>
-					<li>モデルに共通で持たせたい処理（ビヘイビア等）はBaseモデルの親(CoreModel)に実装する。</li>
-					<li>CoreModelは、Phalcon\Mvc\Model を継承する。</li>
+					<li>モデルに共通で持たせたい処理（ビヘイビア等）はBaseモデルの親(AbstractModel)に実装する。</li>
+					<li>AbstractModelは、Phalcon\Mvc\Model を継承する。</li>
 					<li>アプリケーション内で使用するモデルは、Baseモデルを継承する。</li>
 					<li>Baseモデルの生成は以下のようなコマンドで行う。</li>
 				</ul>
 				<pre><code>
-$ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel --name=TABLE_NAME
+$ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\AbstractModel --name=TABLE_NAME
 				</code></pre>
 			</section>
 
