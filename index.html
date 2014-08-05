@@ -49,8 +49,8 @@
 			<div class="slides">
 				<section>
 
-					<h1 style="font-size:2.1em;">Phalcon + AngularJSで作る<br>動画プラットフォーム</h1>
-					<p>Phalcon Night</p>
+					<h1 style="font-size:2.1em;margin-bottom:1em;">Phalcon + AngularJSで作る<br>動画プラットフォーム</h1>
+					<p>Phalcon Night(2014年8月5日)</p>
 					<p>アシアル株式会社 宇都宮諒</p>
 				</section>
 
@@ -59,12 +59,36 @@
 				</section>
 
 				<section>
-					<p>宇都宮諒</p>
+					<p>宇都宮　諒(Utsunomiya Ryo)</p>
 					<ul>
 						<li>アシアル株式会社 所属</li>
 						<li>PHPエンジニア</li>
 					</ul>
 					<img src="img/asial_blog.png" alt="">
+				</section>
+
+				<section>
+					<h3>Phalconとの関わり</h3>
+					<table style="margin-top:1em;">
+						<tr>
+							<th>2014年3月</th>
+							<td>次のプロジェクト用のフレームワークを検討<br>
+							Phalconを採用することに
+							</td>
+						</tr>
+						<tr>
+							<th>2014年4月</th>
+							<td>Phalconを使ったプロジェクトスタート</td>
+						</tr>
+						<tr>
+							<th>2014年5月</th>
+							<td>Phalconドキュメントの日本語翻訳チームにJOIN</td>
+						</tr>
+						<tr>
+							<th>2014年7月</th>
+							<td>Phalconを使ったプロジェクトひと通り完成</td>
+						</tr>
+					</table>
 				</section>
 
 				<section>
@@ -80,11 +104,12 @@
 				<section>
 					<h3>アプリケーション概要</h3>
 					<ul style="margin-top:1em;">
-						<li>B2Bのクローズドな動画プラットフォーム</li>
+						<li>B2Bのクローズドな動画プラットフォーム<br>
+							→イメージは「組織ごとに閉じたYoutube」</li>
 						<li>様々な動画を会社等の組織内で共有したい</li>
 						<li>動画の一部を切り出したり、プレイリストを作ったりしたい</li>
 						<li>動画は、Web及びアプリで視聴したい</li>
-						<li>既存システム(Zend製)を全面的に改修したい</li>
+						<li>既存システム(<a href="http://framework.zend.com/">Zend</a>製)を全面的に改修したい</li>
 						<li>今年の8月から本番運用開始したい（サービスイン当初の顧客は1社）</li>
 					</ul>
 				</section>
@@ -94,11 +119,11 @@
 				</section>
 
 				<section>
-					<h3>インフラ：Azure</h3>
+					<h3>インフラ：<a href="http://azure.microsoft.com/ja-jp/">Azure</a></h3>
 					<ul style="margin-top:1em;">
-						<li>動画配信やエンコード等のサービスを利用するために採用。</li>
-						<li>しかし、諸事情で動画配信やエンコード機能の利用は取りやめに。。。</li>
-						<li>結果的には、「mp4で配信」「ffmpegでエンコード」という形式に落ち着いた。</li>
+						<li>動画配信やエンコード等のサービス(<a href="http://azure.microsoft.com/ja-jp/services/media-services/">Azure Media Services</a>)を利用するために採用。</li>
+						<li>しかし、諸事情によりAzure Media Servicesの利用は取りやめに。</li>
+						<li>結果的には、「mp4で配信」「<a href="https://www.ffmpeg.org/">FFmpeg</a>でエンコード」という形式に落ち着いた。</li>
 						<li>現在、Azureの機能で使ってるのは仮想マシンとストレージ。</li>
 					</ul>
 
@@ -117,16 +142,15 @@
 
 				<section>
 					<h3>システム構成</h3>
-					<ul style="margin:1em 0 1em -5em;">
+					<ul style="margin:1em 0 1em -4em;">
 						<li>CentOS</li>
 						<li>Apache</li>
 						<li>MySQL</li>
 						<li>PHP</li>
 					</ul>
 					<p style="text-align:left;font-size:smaller;width:19em;margin-left:8em;">
-						要は、よくあるLAMP構成。
-						<br>既存システムの構成をそのまま流用。
-					<br>Nginxは検討したが、今のところ不要だと考え、既存のApacheをそのまま使用。</p>
+						既存システムの構成をそのまま流用。<br>
+						Nginxは検討したが、今のところ不要だと考え、既存のApacheをそのまま使用。</p>
 				</section>
 
 				<section>
@@ -155,9 +179,9 @@
 				<section>
 					<h3>Viewの作り方</h3>
 					<ol style="margin-top:1em;">
-						<li>Webでは、当初からAngularJSを使う予定だった。</li>
-						<li>Phalconのテンプレートエンジン・Voltの記法は、Angularの記法とバッティングする。<br>
-							→viewにはVoltを使用せず、生PHPをテンプレートとして使うことに。</li>
+						<li>Webでは、当初から<a href="https://angularjs.org/">AngularJS</a>を使う予定だった。</li>
+						<li>Phalconのテンプレートエンジン・<a href="http://docs.phalconphp.com/en/latest/reference/volt.html">Volt</a>の記法は、Angularの記法とバッティングする。<br>
+							→ViewにはVoltを使用せず、生PHPをテンプレートとして使うことに。</li>
 						<li>Viewの描画はほぼAngularに任せ、PHPは最低限のレイアウトのみを受け持つ。</li>
 					</ol>
 				</section>
@@ -167,9 +191,10 @@
 				</section>
 
 				<section>
-					<h3>プロジェクトタイプ</h3>
+					<h3>プロジェクトの雛形</h3>
 					<ul style="margin-top:1em;">
-						<li>micro / simple / modules がある。</li>
+						<li><a href="https://github.com/phalcon/phalcon-devtools">Phalcon DevTools</a>で生成できる。</li>
+						<li>micro / simple / modules の3タイプがある。</li>
 						<li>今回のアプリでは、modules構成を使用。</li>
 					</ul>
 					<pre><code>
@@ -308,6 +333,16 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\CoreModel
 					<li>「Phalconだから特別な何かをしないといけない」ということはほとんど無い。</li>
 					<li>普通に作れば普通に動く。</li>
 					<li>現時点では荒削りな部分もある。</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>【宣伝】</h3>
+				<p style="margin-top:1em;">アシアル株式会社で提供中のサービス</p>
+				<ul style="margin-top:1em;">
+					<li>HTML5モバイルアプリ開発プラットフォーム<a href="http://monaca.mobi/ja/">Monaca</a></li>
+					<li>受託開発（Webシステム・モバイルアプリ）</li>
+					<li>スクール（<a href="http://www.asial.co.jp/school/juku.php">アシアル塾</a>・企業研修）</li>
 				</ul>
 			</section>
 
