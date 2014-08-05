@@ -230,7 +230,11 @@ $ phalcon project PROJECT_NAME --type=modules
 					<li>Baseモデルの生成は以下のようなコマンドで行う。</li>
 				</ul>
 				<pre><code>
-$ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\AbstractModel --name=TABLE_NAME
+$ phalcon model \
+--namespace=App\\Models\\Base \
+--extends=\\App\\Models\\AbstractModel \
+--output=app/models/Base \
+--name=TABLE_NAME
 				</code></pre>
 			</section>
 
