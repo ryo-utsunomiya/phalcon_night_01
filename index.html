@@ -63,32 +63,10 @@
 					<ul>
 						<li>アシアル株式会社 所属</li>
 						<li>PHPエンジニア</li>
+						<li>PHP歴3年 Phalcon歴5ヶ月</li>
+						<li>Phalcon ドキュメント日本語翻訳チーム レビュアー</li>
 					</ul>
 					<img src="img/asial_blog.png" alt="">
-				</section>
-
-				<section>
-					<h3>Phalconとの関わり</h3>
-					<table style="margin-top:1em;">
-						<tr>
-							<th>2014年3月</th>
-							<td>次のプロジェクト用のフレームワークを検討<br>
-							Phalconを採用することに
-							</td>
-						</tr>
-						<tr>
-							<th>2014年4月</th>
-							<td>Phalconを使ったプロジェクトスタート</td>
-						</tr>
-						<tr>
-							<th>2014年5月</th>
-							<td>Phalconドキュメントの日本語翻訳チームにJOIN</td>
-						</tr>
-						<tr>
-							<th>2014年7月</th>
-							<td>Phalconを使ったプロジェクトひと通り完成</td>
-						</tr>
-					</table>
 				</section>
 
 				<section>
@@ -272,22 +250,22 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\AbstractM
 				<h3>Phalcon本体のバグの対処法</h3>
 				<ol style="margin-top:1em;">
 					<li>最新版のPhalconを使う。</li>
-					<li>止まっている箇所を特定する</li>
-					<li>止まっている原因のクラスが分かったら、GitHubにIssueが上がってないか確認する（回避策が載ってるかも）</li>
+					<li>止まっている箇所を特定する。</li>
+					<li>止まっている原因のクラス・メソッドが分かったら、GitHubにIssueが上がってないか確認する（回避策が載ってるかも）。</li>
 					<li>止まっている箇所のコードを色々変更してみる（大体これで回避できる）。</li>
-					<li>止まっているクラスやメソッドのソースコード(Phalcon本体)を読んでみる（回避策が分かるかも）。</li>
+					<li>止まっているクラス・メソッドのPhalcon本体のソースコードを読んでみる（回避策が分かるかも）。</li>
 				</ol>
 				<p style="margin-top:1em;">大きな変更の直後にエラーが発生すると、原因究明が大変。<br>
 					こまめにコミット→テストのサイクルを走らせることで、対処しやすくなる。</p>
 			</section>
 
 			<section>
-				<h3>不具合をすぐに検知する体制を作る</h3>
-				<ul>
-					<li>CI(Jenkins等)</li>
-					<li>ユニットテスト(PHPUnit)</li>
-					<li>APIテスト(frisby.js等)</li>
-					<li>（今回は導入しなかったが）Selenuimも有効</li>
+				<h3>不具合を検知する体制を作る</h3>
+				<ul style="margin:1em 0;">
+					<li>CI(<a href="http://jenkins-ci.org/">Jenkins</a>)</li>
+					<li>ユニットテスト(<a href="http://phpunit.de/">PHPUnit</a>)</li>
+					<li>APIテスト(<a href="http://frisbyjs.com/">Frisby.js</a>)</li>
+					<li>（今回は導入しなかったが）<a href="http://www.seleniumhq.org/">Selenuim</a>も有効</li>
 				</ul>
 				<p>
 				Phalconのバグによるエラーは、予測が困難。<br>
@@ -305,7 +283,7 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\AbstractM
 					<li>PhalconのAPIリファレンスは、ソースコードから自動生成している。<br>
 						→ソースコードのコメントが誤っていると、APIリファレンスまでおかしくなる。</li>
 					<li>自動生成スクリプトにバグがあり、正常にパラメータを取れていないことがある。</li>
-					<li>例：Phalcon\Http\Request::getJsonRawBody()の第1引数は、ソースのDocコメントには載っているが、APIリファレンスには載っていない。</li>
+					<li>例：Phalcon\Http\Request::getJsonRawBody()の第1引数は、<a href="https://github.com/phalcon/cphalcon/blob/master/ext/http/request.c#L959">ソースのDocコメント</a>には載っているが、<a href="http://docs.phalconphp.com/ja/latest/api/Phalcon_Http_Request.html">APIリファレンス</a>には載っていない。</li>
 				</ul>
 			</section>
 
@@ -320,16 +298,16 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\AbstractM
 
 			<section>
 				<h3>これから苦労しそうなこと：<br>バージョンアップ</h3>
-				<ul>
+				<ul style="margin-top:1em;">
 					<li>Phalconの現行バージョン(1.3.2)はまだ不安定な部分があるので、継続して開発していく上で、より安定したバージョンに差し替えたい。</li>
-					<li>Phalcon 2ではZephirという中間言語を挟むようになるが、まだ不安定で、Zephirのコンパイラのビルドにこけることがしばしば…</li>
+					<li>Phalcon 2ではZephirという中間言語を挟むようになるが、まだ不安定で、環境によってはZephirコンパイラのビルドにこける…</li>
 					<li>Phalcon 2の初期バージョンは、1系とのAPI互換性が保証されてるので、その点は割と安心。</li>
 				</ul>
 			</section>
 
 			<section>
 				<h3>まとめ</h3>
-				<ul>
+				<ul style="margin-top:1em;">
 					<li>「Phalconだから特別な何かをしないといけない」ということはほとんど無い。</li>
 					<li>普通に作れば普通に動く。</li>
 					<li>現時点では荒削りな部分もある。</li>
@@ -340,7 +318,7 @@ $ phalcon model --namespace=App\\Models\\Base --extends=\\App\\Models\\AbstractM
 				<h3>【宣伝】</h3>
 				<p style="margin-top:1em;">アシアル株式会社で提供中のサービス</p>
 				<ul style="margin-top:1em;">
-					<li>HTML5モバイルアプリ開発プラットフォーム<a href="http://monaca.mobi/ja/">Monaca</a></li>
+					<li><a href="http://monaca.mobi/ja/">Monaca</a>（HTML5モバイルアプリ開発プラットフォーム）</li>
 					<li>受託開発（Webシステム・モバイルアプリ）</li>
 					<li>スクール（<a href="http://www.asial.co.jp/school/juku.php">アシアル塾</a>・企業研修）</li>
 				</ul>
